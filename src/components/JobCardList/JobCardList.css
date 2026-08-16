@@ -1,0 +1,10 @@
+.job-card-list {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.job-card-list__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
