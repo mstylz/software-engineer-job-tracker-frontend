@@ -2,6 +2,23 @@
   width: 100%;
   padding: 24px 40px;
   border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer__link {
+  color: #2563eb;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
 }
 
 .footer__copyright {
@@ -9,5 +26,4 @@
   color: #6b7280;
   font-size: 14px;
   line-height: 20px;
-  text-align: center;
 }
