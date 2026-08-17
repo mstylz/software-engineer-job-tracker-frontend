@@ -1,0 +1,47 @@
+.saved-jobs {
+  width: 100%;
+  min-height: 60vh;
+  padding: 40px;
+}
+
+.saved-jobs__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.saved-jobs__title {
+  margin: 0 0 16px;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+.saved-jobs__text {
+  margin: 0;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-jobs {
+    padding: 32px 24px;
+  }
+
+  .saved-jobs__title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .saved-jobs {
+    padding: 24px 16px;
+  }
+
+  .saved-jobs__title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

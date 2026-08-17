@@ -1,15 +1,16 @@
+import { Link } from 'react-router-dom'
 import './Navigation.css'
 
 function Navigation() {
   return (
     <nav className="navigation">
-      <a className="navigation__link" href="/">
+      <Link className="navigation__link" to="/">
         Home
-      </a>
+      </Link>
 
-      <a className="navigation__link" href="/saved-jobs">
+      <Link className="navigation__link" to="/saved-jobs">
         Saved Jobs
-      </a>
+      </Link>
 
       <button className="navigation__button" type="button">
         Sign In

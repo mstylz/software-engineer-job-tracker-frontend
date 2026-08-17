@@ -1,16 +1,17 @@
+import { Link } from 'react-router-dom'
 import './Footer.css'
 
 function Footer() {
   return (
     <footer className="footer">
       <nav className="footer__links" aria-label="Footer navigation">
-        <a className="footer__link" href="/">
+        <Link className="footer__link" to="/">
           Home
-        </a>
+        </Link>
 
-        <a className="footer__link" href="/saved-jobs">
+        <Link className="footer__link" to="/saved-jobs">
           Saved Jobs
-        </a>
+        </Link>
       </nav>
 
       <p className="footer__copyright">
