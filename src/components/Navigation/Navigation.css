@@ -23,3 +23,24 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navigation {
+    gap: 12px;
+  }
+  .navigation__link,
+  .navigation__button {
+    font-size: 14px;
+  }
+  .navigation__button {
+    padding: 10px 16px;
+  }
+}

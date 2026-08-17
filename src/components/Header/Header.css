@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
 
 .header__title {
@@ -14,4 +15,23 @@
   font-size: 24px;
   line-height: 1.2;
   font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 20px 24px 32px;
+  }
+  .header__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 16px 16px 24px;
+  }
+  .header__title {
+    font-size: 20px;
+  }
 }
