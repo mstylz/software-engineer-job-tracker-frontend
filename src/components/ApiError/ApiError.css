@@ -1,0 +1,23 @@
+.api-error {
+  display: flex;
+  min-height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.api-error__title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.api-error__text {
+  max-width: 560px;
+  margin: 0;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 24px;
+}
