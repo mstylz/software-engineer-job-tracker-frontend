@@ -1,0 +1,24 @@
+.register-modal__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #1a1b22;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.register-modal__input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #1a1b22;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.register-modal__input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

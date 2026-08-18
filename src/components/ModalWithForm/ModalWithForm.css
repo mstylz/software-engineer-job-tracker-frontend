@@ -1,0 +1,99 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  padding: 32px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #1a1b22;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal__title {
+  margin: 0 0 24px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal__submit {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal__secondary {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.modal__secondary-button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #2563eb;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal__secondary-button:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 480px) {
+  .modal {
+    padding: 16px;
+  }
+  .modal__container {
+    padding: 28px 20px 24px;
+  }
+  .modal__title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .modal__secondary {
+    flex-wrap: wrap;
+  }
+}

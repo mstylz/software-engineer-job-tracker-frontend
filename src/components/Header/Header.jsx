@@ -2,12 +2,13 @@ import Navigation from '../Navigation/Navigation'
 import SearchForm from '../SearchForm/SearchForm'
 import './Header.css'
 
-function Header() {
+function Header({ onSignInClick }) {
   return (
     <header className="header">
       <div className="header__top">
         <h1 className="header__title">Software Engineer Job Tracker</h1>
-        <Navigation />
+
+        <Navigation onSignInClick={onSignInClick} />
       </div>
 
       <SearchForm />
