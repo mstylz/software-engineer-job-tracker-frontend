@@ -1,22 +1,40 @@
 import './JobCard.css'
 
-function JobCard() {
+function JobCard({ job }) {
+  const companyName = job.company?.name || 'Company not listed'
+
+  const locationNames =
+    job.locations?.map((location) => location.name).join(', ') ||
+    'Location not listed'
+
+  const jobUrl = job.refs?.landing_page
+
+  const publicationDate = job.publication_date
+    ? new Date(job.publication_date).toLocaleDateString()
+    : 'Date not listed'
+
   return (
     <article className="job-card">
-      <h3 className="job-card__title">Frontend Developer</h3>
-      <p className="job-card__company">Example Company</p>
-      <p className="job-card__location">Remote</p>
+      <h3 className="job-card__title">{job.name}</h3>
+
+      <p className="job-card__company">{companyName}</p>
+
+      <p className="job-card__location">{locationNames}</p>
+
       <p className="job-card__description">
-        Build modern web applications using React and JavaScript.
+        Published: {publicationDate}
       </p>
-      <a
-        className="job-card__link"
-        href="https://example.com"
-        target="_blank"
-        rel="noreferrer"
-      >
-        View Job
-      </a>
+
+      {jobUrl && (
+        <a
+          className="job-card__link"
+          href={jobUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          View Job
+        </a>
+      )}
     </article>
   )
 }

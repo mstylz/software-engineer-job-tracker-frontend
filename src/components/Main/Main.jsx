@@ -4,7 +4,12 @@ import NothingFound from '../NothingFound/NothingFound'
 import ApiError from '../ApiError/ApiError'
 import './Main.css'
 
-function Main({ resultState = 'success' }) {
+function Main({
+  jobs = [],
+  resultState = 'success',
+  visibleCount,
+  onShowMore,
+}) {
   function renderResults() {
     if (resultState === 'loading') {
       return <Preloader />
@@ -18,7 +23,13 @@ function Main({ resultState = 'success' }) {
       return <ApiError />
     }
 
-    return <JobCardList />
+    return (
+      <JobCardList
+        jobs={jobs}
+        visibleCount={visibleCount}
+        onShowMore={onShowMore}
+      />
+    )
   }
 
   return (

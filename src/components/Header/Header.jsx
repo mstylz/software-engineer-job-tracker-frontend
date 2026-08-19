@@ -2,7 +2,7 @@ import Navigation from '../Navigation/Navigation'
 import SearchForm from '../SearchForm/SearchForm'
 import './Header.css'
 
-function Header({ onSignInClick }) {
+function Header({ onSignInClick, onSearch }) {
   return (
     <header className="header">
       <div className="header__top">
@@ -11,7 +11,7 @@ function Header({ onSignInClick }) {
         <Navigation onSignInClick={onSignInClick} />
       </div>
 
-      <SearchForm />
+      <SearchForm onSearch={onSearch} />
     </header>
   )
 }

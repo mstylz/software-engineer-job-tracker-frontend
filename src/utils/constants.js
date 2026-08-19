@@ -1,0 +1,3 @@
+const JOBS_API_URL = 'https://www.themuse.com/api/public/jobs'
+
+export { JOBS_API_URL }
