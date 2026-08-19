@@ -33,9 +33,44 @@
   color: #4b5563;
 }
 
-.job-card__link {
+.job-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: auto;
+}
+
+.job-card__link {
   color: #2563eb;
   font-weight: 600;
   text-decoration: none;
+}
+
+.job-card__save-button {
+  padding: 10px 14px;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #2563eb;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.job-card__save-button:focus,
+.job-card__link:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 480px) {
+  .job-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .job-card__save-button {
+    width: 100%;
+  }
 }

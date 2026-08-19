@@ -1,15 +1,30 @@
 import JobCard from '../JobCard/JobCard'
 import './JobCardList.css'
 
-function JobCardList({ jobs = [], visibleCount = 3, onShowMore }) {
+function JobCardList({
+  jobs = [],
+  savedJobs = [],
+  visibleCount = 3,
+  onShowMore,
+  onSaveToggle,
+}) {
   const visibleJobs = jobs.slice(0, visibleCount)
 
   return (
     <section className="job-card-list">
       <div className="job-card-list__grid">
-        {visibleJobs.map((job) => (
-          <JobCard key={job.id} job={job} />
-        ))}
+        {visibleJobs.map((job) => {
+          const isSaved = savedJobs.some((savedJob) => savedJob.id === job.id)
+
+          return (
+            <JobCard
+              key={job.id}
+              job={job}
+              isSaved={isSaved}
+              onSaveToggle={onSaveToggle}
+            />
+          )
+        })}
       </div>
 
       {visibleCount < jobs.length && (

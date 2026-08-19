@@ -1,6 +1,6 @@
 import './JobCard.css'
 
-function JobCard({ job }) {
+function JobCard({ job, isSaved = false, onSaveToggle }) {
   const companyName = job.company?.name || 'Company not listed'
 
   const locationNames =
@@ -13,6 +13,10 @@ function JobCard({ job }) {
     ? new Date(job.publication_date).toLocaleDateString()
     : 'Date not listed'
 
+  function handleSaveClick() {
+    onSaveToggle(job)
+  }
+
   return (
     <article className="job-card">
       <h3 className="job-card__title">{job.name}</h3>
@@ -21,20 +25,28 @@ function JobCard({ job }) {
 
       <p className="job-card__location">{locationNames}</p>
 
-      <p className="job-card__description">
-        Published: {publicationDate}
-      </p>
+      <p className="job-card__description">Published: {publicationDate}</p>
 
-      {jobUrl && (
-        <a
-          className="job-card__link"
-          href={jobUrl}
-          target="_blank"
-          rel="noreferrer"
+      <div className="job-card__actions">
+        {jobUrl && (
+          <a
+            className="job-card__link"
+            href={jobUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View Job
+          </a>
+        )}
+
+        <button
+          className="job-card__save-button"
+          type="button"
+          onClick={handleSaveClick}
         >
-          View Job
-        </a>
-      )}
+          {isSaved ? 'Remove Saved Job' : 'Save Job'}
+        </button>
+      </div>
     </article>
   )
 }

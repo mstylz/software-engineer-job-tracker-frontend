@@ -6,9 +6,11 @@ import './Main.css'
 
 function Main({
   jobs = [],
+  savedJobs = [],
   resultState = 'success',
   visibleCount,
   onShowMore,
+  onSaveToggle,
 }) {
   function renderResults() {
     if (resultState === 'loading') {
@@ -26,8 +28,10 @@ function Main({
     return (
       <JobCardList
         jobs={jobs}
+        savedJobs={savedJobs}
         visibleCount={visibleCount}
         onShowMore={onShowMore}
+        onSaveToggle={onSaveToggle}
       />
     )
   }

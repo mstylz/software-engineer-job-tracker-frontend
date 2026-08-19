@@ -14,6 +14,7 @@ function App() {
   const [activeModal, setActiveModal] = useState(null)
   const [allJobs, setAllJobs] = useState([])
   const [jobs, setJobs] = useState([])
+  const [savedJobs, setSavedJobs] = useState([])
   const [resultState, setResultState] = useState('loading')
   const [visibleCount, setVisibleCount] = useState(3)
 
@@ -73,6 +74,18 @@ function App() {
     setVisibleCount((currentCount) => currentCount + 3)
   }
 
+  function handleSaveToggle(job) {
+    const isAlreadySaved = savedJobs.some((savedJob) => savedJob.id === job.id)
+
+    if (isAlreadySaved) {
+      setSavedJobs((currentJobs) =>
+        currentJobs.filter((savedJob) => savedJob.id !== job.id),
+      )
+    } else {
+      setSavedJobs((currentJobs) => [...currentJobs, job])
+    }
+  }
+
   function handleSignInClick() {
     setActiveModal('login')
   }
@@ -101,16 +114,23 @@ function App() {
             <>
               <Main
                 jobs={jobs}
+                savedJobs={savedJobs}
                 resultState={resultState}
                 visibleCount={visibleCount}
                 onShowMore={handleShowMore}
+                onSaveToggle={handleSaveToggle}
               />
               <About />
             </>
           }
         />
 
-        <Route path="/saved-jobs" element={<SavedJobs />} />
+        <Route
+          path="/saved-jobs"
+          element={
+            <SavedJobs savedJobs={savedJobs} onSaveToggle={handleSaveToggle} />
+          }
+        />
       </Routes>
 
       <Footer />
