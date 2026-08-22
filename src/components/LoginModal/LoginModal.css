@@ -22,3 +22,11 @@
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
+
+.login-modal__input:invalid:not(:placeholder-shown) {
+  border-color: #dc2626;
+}
+
+.login-modal__input:valid:not(:placeholder-shown) {
+  border-color: #16a34a;
+}

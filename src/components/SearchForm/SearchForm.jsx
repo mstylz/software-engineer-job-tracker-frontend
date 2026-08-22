@@ -4,13 +4,21 @@ import './SearchForm.css'
 function SearchForm({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
 
+  const trimmedSearchTerm = searchTerm.trim()
+  const isSearchDisabled = trimmedSearchTerm.length === 0
+
   function handleChange(event) {
     setSearchTerm(event.target.value)
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    onSearch(searchTerm.trim())
+
+    if (isSearchDisabled) {
+      return
+    }
+
+    onSearch(trimmedSearchTerm)
   }
 
   return (
@@ -24,7 +32,11 @@ function SearchForm({ onSearch }) {
         required
       />
 
-      <button className="search-form__button" type="submit">
+      <button
+        className="search-form__button"
+        type="submit"
+        disabled={isSearchDisabled}
+      >
         Search
       </button>
     </form>
