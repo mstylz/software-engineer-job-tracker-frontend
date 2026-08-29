@@ -6,6 +6,10 @@ Software Engineer Job Tracker is a responsive React application that helps users
 
 https://job-tracker.jumpingcrab.com
 
+## Project Pitch Video
+
+Check out [this project pitch video](https://www.loom.com/share/35ba853a493d4bc1be9d21c1986a79ee), where I demonstrate the project, explain how it works, discuss challenges I faced, and describe what I learned while building it.
+
 ## Features
 
 - Browse current software engineering job listings
