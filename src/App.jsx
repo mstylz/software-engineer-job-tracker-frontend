@@ -4,6 +4,7 @@ import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import About from './components/About/About'
 import SavedJobs from './components/SavedJobs/SavedJobs'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import LoginModal from './components/LoginModal/LoginModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
 import Footer from './components/Footer/Footer'
@@ -17,6 +18,7 @@ function App() {
   const [savedJobs, setSavedJobs] = useState([])
   const [resultState, setResultState] = useState('loading')
   const [visibleCount, setVisibleCount] = useState(3)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     getJobs()
@@ -100,12 +102,17 @@ function App() {
 
   function handleAuthSubmit(event) {
     event.preventDefault()
+    setIsLoggedIn(true)
     closeActiveModal()
   }
 
   return (
     <div className="app">
-      <Header onSignInClick={handleSignInClick} onSearch={handleSearch} />
+      <Header
+        isLoggedIn={isLoggedIn}
+        onSignInClick={handleSignInClick}
+        onSearch={handleSearch}
+      />
 
       <Routes>
         <Route
@@ -128,12 +135,17 @@ function App() {
         <Route
           path="/saved-jobs"
           element={
-            <SavedJobs savedJobs={savedJobs} onSaveToggle={handleSaveToggle} />
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <SavedJobs
+                savedJobs={savedJobs}
+                onSaveToggle={handleSaveToggle}
+              />
+            </ProtectedRoute>
           }
         />
       </Routes>
 
-      <Footer />
+      <Footer isLoggedIn={isLoggedIn} />
 
       <LoginModal
         isOpen={activeModal === 'login'}

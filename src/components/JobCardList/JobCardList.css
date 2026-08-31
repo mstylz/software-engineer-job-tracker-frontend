@@ -22,6 +22,11 @@
   line-height: 20px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.job-card-list__show-more:hover {
+  background-color: #1d4ed8;
 }
 
 .job-card-list__show-more:focus {

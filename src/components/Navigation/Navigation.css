@@ -10,6 +10,11 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navigation__link:hover {
+  color: #2563eb;
 }
 
 .navigation__button {
@@ -22,6 +27,16 @@
   line-height: 20px;
   font-weight: 500;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.navigation__button:hover {
+  border-color: #2563eb;
+  background-color: #2563eb;
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
@@ -36,10 +51,12 @@
   .navigation {
     gap: 12px;
   }
+
   .navigation__link,
   .navigation__button {
     font-size: 14px;
   }
+
   .navigation__button {
     padding: 10px 16px;
   }

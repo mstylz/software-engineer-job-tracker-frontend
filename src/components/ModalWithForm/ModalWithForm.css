@@ -29,6 +29,14 @@
   font-size: 32px;
   line-height: 1;
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.modal__close:hover {
+  color: #2563eb;
+  transform: scale(1.1);
 }
 
 .modal__title {
@@ -55,6 +63,14 @@
   line-height: 20px;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.modal__submit:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
 }
 
 .modal__secondary {
@@ -68,13 +84,23 @@
 }
 
 .modal__secondary-button {
-  padding: 0;
+  padding: 2px 4px;
   border: none;
+  border-radius: 4px;
   background-color: transparent;
   color: #2563eb;
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.modal__secondary-button:hover {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
 .modal__secondary-button:focus {
@@ -86,13 +112,16 @@
   .modal {
     padding: 16px;
   }
+
   .modal__container {
     padding: 28px 20px 24px;
   }
+
   .modal__title {
     font-size: 22px;
     line-height: 28px;
   }
+
   .modal__secondary {
     flex-wrap: wrap;
   }

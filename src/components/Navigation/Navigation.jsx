@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom'
 import './Navigation.css'
 
-function Navigation({ onSignInClick }) {
+function Navigation({ isLoggedIn, onSignInClick }) {
   return (
     <nav className="navigation">
       <Link className="navigation__link" to="/">
         Home
       </Link>
 
-      <Link className="navigation__link" to="/saved-jobs">
-        Saved Jobs
-      </Link>
+      {isLoggedIn && (
+        <Link className="navigation__link" to="/saved-jobs">
+          Saved Jobs
+        </Link>
+      )}
 
       <button
         className="navigation__button"
