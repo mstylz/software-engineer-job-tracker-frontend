@@ -8,24 +8,47 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import LoginModal from './components/LoginModal/LoginModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
 import Footer from './components/Footer/Footer'
-import { getJobs } from './utils/JobsApi'
+import { getJobs, searchJobs } from './utils/JobsApi'
 import './App.css'
+
+const USER_STORAGE_KEY = 'jobTrackerCurrentUser'
+const SAVED_JOBS_STORAGE_KEY = 'jobTrackerSavedJobs'
+
+function getStoredUser() {
+  try {
+    const storedUser = localStorage.getItem(USER_STORAGE_KEY)
+
+    return storedUser ? JSON.parse(storedUser) : null
+  } catch {
+    return null
+  }
+}
+
+function getStoredSavedJobs() {
+  try {
+    const storedJobs = localStorage.getItem(SAVED_JOBS_STORAGE_KEY)
+
+    return storedJobs ? JSON.parse(storedJobs) : []
+  } catch {
+    return []
+  }
+}
 
 function App() {
   const [activeModal, setActiveModal] = useState(null)
-  const [allJobs, setAllJobs] = useState([])
   const [jobs, setJobs] = useState([])
-  const [savedJobs, setSavedJobs] = useState([])
+  const [savedJobs, setSavedJobs] = useState(getStoredSavedJobs)
   const [resultState, setResultState] = useState('loading')
   const [visibleCount, setVisibleCount] = useState(3)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [currentUser, setCurrentUser] = useState(getStoredUser)
+
+  const isLoggedIn = Boolean(currentUser)
 
   useEffect(() => {
     getJobs()
       .then((response) => {
         const receivedJobs = response.results || []
 
-        setAllJobs(receivedJobs)
         setJobs(receivedJobs)
 
         if (receivedJobs.length === 0) {
@@ -35,41 +58,29 @@ function App() {
         }
       })
       .catch(() => {
-        setAllJobs([])
         setJobs([])
         setResultState('error')
       })
   }, [])
 
   function handleSearch(searchTerm) {
-    const normalizedSearchTerm = searchTerm.toLowerCase()
-
-    const filteredJobs = allJobs.filter((job) => {
-      const title = job.name?.toLowerCase() || ''
-      const companyName = job.company?.name?.toLowerCase() || ''
-      const locations =
-        job.locations
-          ?.map((location) => location.name)
-          .join(' ')
-          .toLowerCase() || ''
-      const contents = job.contents?.toLowerCase() || ''
-
-      return (
-        title.includes(normalizedSearchTerm) ||
-        companyName.includes(normalizedSearchTerm) ||
-        locations.includes(normalizedSearchTerm) ||
-        contents.includes(normalizedSearchTerm)
-      )
-    })
-
-    setJobs(filteredJobs)
+    setResultState('loading')
     setVisibleCount(3)
 
-    if (filteredJobs.length === 0) {
-      setResultState('empty')
-    } else {
-      setResultState('success')
-    }
+    searchJobs(searchTerm)
+      .then((foundJobs) => {
+        setJobs(foundJobs)
+
+        if (foundJobs.length === 0) {
+          setResultState('empty')
+        } else {
+          setResultState('success')
+        }
+      })
+      .catch(() => {
+        setJobs([])
+        setResultState('error')
+      })
   }
 
   function handleShowMore() {
@@ -77,15 +88,27 @@ function App() {
   }
 
   function handleSaveToggle(job) {
+    if (!isLoggedIn) {
+      return
+    }
+
     const isAlreadySaved = savedJobs.some((savedJob) => savedJob.id === job.id)
 
+    let updatedSavedJobs
+
     if (isAlreadySaved) {
-      setSavedJobs((currentJobs) =>
-        currentJobs.filter((savedJob) => savedJob.id !== job.id),
+      updatedSavedJobs = savedJobs.filter(
+        (savedJob) => savedJob.id !== job.id,
       )
     } else {
-      setSavedJobs((currentJobs) => [...currentJobs, job])
+      updatedSavedJobs = [...savedJobs, job]
     }
+
+    setSavedJobs(updatedSavedJobs)
+    localStorage.setItem(
+      SAVED_JOBS_STORAGE_KEY,
+      JSON.stringify(updatedSavedJobs),
+    )
   }
 
   function handleSignInClick() {
@@ -100,17 +123,39 @@ function App() {
     setActiveModal(null)
   }
 
-  function handleAuthSubmit(event) {
-    event.preventDefault()
-    setIsLoggedIn(true)
+  function handleLogin({ email }) {
+    const user = {
+      email: email.trim(),
+    }
+
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+    setCurrentUser(user)
     closeActiveModal()
+  }
+
+  function handleRegister({ name, email }) {
+    const user = {
+      name: name.trim(),
+      email: email.trim(),
+    }
+
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+    setCurrentUser(user)
+    closeActiveModal()
+  }
+
+  function handleLogout() {
+    localStorage.removeItem(USER_STORAGE_KEY)
+    setCurrentUser(null)
   }
 
   return (
     <div className="app">
       <Header
+        currentUser={currentUser}
         isLoggedIn={isLoggedIn}
         onSignInClick={handleSignInClick}
+        onLogout={handleLogout}
         onSearch={handleSearch}
       />
 
@@ -124,6 +169,7 @@ function App() {
                 savedJobs={savedJobs}
                 resultState={resultState}
                 visibleCount={visibleCount}
+                isLoggedIn={isLoggedIn}
                 onShowMore={handleShowMore}
                 onSaveToggle={handleSaveToggle}
               />
@@ -138,6 +184,7 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <SavedJobs
                 savedJobs={savedJobs}
+                isLoggedIn={isLoggedIn}
                 onSaveToggle={handleSaveToggle}
               />
             </ProtectedRoute>
@@ -150,14 +197,14 @@ function App() {
       <LoginModal
         isOpen={activeModal === 'login'}
         onClose={closeActiveModal}
-        onSubmit={handleAuthSubmit}
+        onSubmit={handleLogin}
         onRegisterClick={handleRegisterClick}
       />
 
       <RegisterModal
         isOpen={activeModal === 'register'}
         onClose={closeActiveModal}
-        onSubmit={handleAuthSubmit}
+        onSubmit={handleRegister}
         onSignInClick={handleSignInClick}
       />
     </div>

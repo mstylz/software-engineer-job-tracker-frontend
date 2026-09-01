@@ -68,9 +68,15 @@
     transform 0.2s ease;
 }
 
-.modal__submit:hover {
+.modal__submit:hover:not(:disabled) {
   background-color: #1d4ed8;
   transform: translateY(-1px);
+}
+
+.modal__submit:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .modal__secondary {

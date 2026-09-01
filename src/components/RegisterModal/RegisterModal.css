@@ -30,3 +30,11 @@
 .register-modal__input:valid:not(:placeholder-shown) {
   border-color: #16a34a;
 }
+
+.register-modal__error {
+  min-height: 16px;
+  color: #dc2626;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}

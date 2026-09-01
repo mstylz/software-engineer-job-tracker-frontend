@@ -9,6 +9,7 @@ function Main({
   savedJobs = [],
   resultState = 'success',
   visibleCount,
+  isLoggedIn = false,
   onShowMore,
   onSaveToggle,
 }) {
@@ -30,6 +31,7 @@ function Main({
         jobs={jobs}
         savedJobs={savedJobs}
         visibleCount={visibleCount}
+        isLoggedIn={isLoggedIn}
         onShowMore={onShowMore}
         onSaveToggle={onSaveToggle}
       />

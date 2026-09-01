@@ -1,6 +1,11 @@
 import './JobCard.css'
 
-function JobCard({ job, isSaved = false, onSaveToggle }) {
+function JobCard({
+  job,
+  isSaved = false,
+  isLoggedIn = false,
+  onSaveToggle,
+}) {
   const companyName = job.company?.name || 'Company not listed'
 
   const locationNames =
@@ -39,13 +44,15 @@ function JobCard({ job, isSaved = false, onSaveToggle }) {
           </a>
         )}
 
-        <button
-          className="job-card__save-button"
-          type="button"
-          onClick={handleSaveClick}
-        >
-          {isSaved ? 'Remove Saved Job' : 'Save Job'}
-        </button>
+        {isLoggedIn && (
+          <button
+            className="job-card__save-button"
+            type="button"
+            onClick={handleSaveClick}
+          >
+            {isSaved ? 'Remove Saved Job' : 'Save Job'}
+          </button>
+        )}
       </div>
     </article>
   )

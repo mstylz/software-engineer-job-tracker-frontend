@@ -1,7 +1,11 @@
 import JobCard from '../JobCard/JobCard'
 import './SavedJobs.css'
 
-function SavedJobs({ savedJobs = [], onSaveToggle }) {
+function SavedJobs({
+  savedJobs = [],
+  isLoggedIn = false,
+  onSaveToggle,
+}) {
   return (
     <main className="saved-jobs">
       <section className="saved-jobs__content">
@@ -16,6 +20,7 @@ function SavedJobs({ savedJobs = [], onSaveToggle }) {
                 key={job.id}
                 job={job}
                 isSaved
+                isLoggedIn={isLoggedIn}
                 onSaveToggle={onSaveToggle}
               />
             ))}

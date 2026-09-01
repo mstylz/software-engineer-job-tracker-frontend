@@ -5,6 +5,7 @@ function JobCardList({
   jobs = [],
   savedJobs = [],
   visibleCount = 3,
+  isLoggedIn = false,
   onShowMore,
   onSaveToggle,
 }) {
@@ -21,6 +22,7 @@ function JobCardList({
               key={job.id}
               job={job}
               isSaved={isSaved}
+              isLoggedIn={isLoggedIn}
               onSaveToggle={onSaveToggle}
             />
           )

@@ -9,6 +9,7 @@ function ModalWithForm({
   children,
   buttonText,
   onSubmit,
+  isValid,
   secondaryText,
   secondaryButtonText,
   onSecondaryClick,
@@ -69,7 +70,11 @@ function ModalWithForm({
         <form className="modal__form" name={name} onSubmit={onSubmit}>
           {children}
 
-          <button className="modal__submit" type="submit">
+          <button
+            className="modal__submit"
+            type="submit"
+            disabled={!isValid}
+          >
             {buttonText}
           </button>
         </form>

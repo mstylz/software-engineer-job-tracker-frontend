@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom'
 import './Navigation.css'
 
-function Navigation({ isLoggedIn, onSignInClick }) {
+function Navigation({
+  currentUser,
+  isLoggedIn,
+  onSignInClick,
+  onLogout,
+}) {
+  const userLabel = currentUser?.name || currentUser?.email
+
   return (
     <nav className="navigation">
       <Link className="navigation__link" to="/">
@@ -14,13 +21,27 @@ function Navigation({ isLoggedIn, onSignInClick }) {
         </Link>
       )}
 
-      <button
-        className="navigation__button"
-        type="button"
-        onClick={onSignInClick}
-      >
-        Sign In
-      </button>
+      {isLoggedIn ? (
+        <>
+          <span className="navigation__user">{userLabel}</span>
+
+          <button
+            className="navigation__button"
+            type="button"
+            onClick={onLogout}
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <button
+          className="navigation__button"
+          type="button"
+          onClick={onSignInClick}
+        >
+          Sign In
+        </button>
+      )}
     </nav>
   )
 }

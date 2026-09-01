@@ -17,6 +17,15 @@
   color: #2563eb;
 }
 
+.navigation__user {
+  max-width: 220px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
 .navigation__button {
   padding: 12px 20px;
   border: 1px solid #1a1b22;
@@ -59,5 +68,10 @@
 
   .navigation__button {
     padding: 10px 16px;
+  }
+
+  .navigation__user {
+    max-width: 100%;
+    font-size: 13px;
   }
 }
