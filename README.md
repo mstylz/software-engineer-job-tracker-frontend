@@ -13,17 +13,21 @@ Check out [this project pitch video](https://www.loom.com/share/35ba853a493d4bc1
 ## Features
 
 - Browse current software engineering job listings
-- Search jobs by title, company, location, or description
+- Search jobs by title, company, or location
 - Display three jobs initially
 - Load three additional jobs at a time with the Show More button
-- Save jobs for later review during the current session
+- Save jobs for later review with local browser persistence
 - Remove saved jobs
-- View saved jobs on a separate route
+- View saved jobs on a separate protected route
 - Display loading, empty-result, and API error states
 - Responsive layout for desktop, tablet, and mobile
-- Login and registration modal interfaces
+- Mock login and registration using localStorage
+- Persist the authenticated user across page refreshes
+- Hide save functionality from unauthorized users
+- Display the authenticated user's name or email with a logout button
 - Modal closing by close button, overlay click, and Escape key
 - Form validation and focus states
+- Reusable form state and validation hook
 
 ## Technologies
 
@@ -34,6 +38,7 @@ Check out [this project pitch video](https://www.loom.com/share/35ba853a493d4bc1
 - CSS
 - BEM methodology
 - Fetch API
+- LocalStorage
 - The Muse API
 - Nginx
 - Google Cloud Compute Engine
@@ -54,6 +59,24 @@ API requests are handled in:
 src/utils/JobsApi.js
 ```
 
+## Authentication
+
+Stage 1 uses mocked frontend authentication as required for project review.
+
+Login and registration form values are collected and validated in React. The authenticated user's name or email is stored in `localStorage`, allowing the mocked login state to persist after a page refresh.
+
+Passwords are used only for form validation and are not stored.
+
+Logging out removes the current authenticated user from localStorage.
+
+## Saved Jobs
+
+Only authenticated users can save or remove jobs.
+
+Saved jobs are stored in `localStorage`, so they remain available after refreshing the browser or logging out and signing back in from the same browser.
+
+Unauthorized users do not see Save Job controls or Saved Jobs navigation.
+
 ## Routes
 
 The application contains two main frontend routes:
@@ -68,9 +91,9 @@ Main job search page.
 /saved-jobs
 ```
 
-Saved jobs page.
+Protected saved jobs page. Unauthorized users are redirected to the main route.
 
-React Router handles client-side navigation. The deployed Nginx configuration uses an SPA fallback so direct requests to `/saved-jobs` are served correctly.
+React Router handles client-side navigation. The deployed Nginx configuration uses an SPA fallback so direct requests to `/saved-jobs` are served correctly before React handles the protected route.
 
 ## Project Structure
 
@@ -89,6 +112,7 @@ src/
 │   ├── Navigation/
 │   ├── NothingFound/
 │   ├── Preloader/
+│   ├── ProtectedRoute/
 │   ├── RegisterModal/
 │   ├── SavedJobs/
 │   └── SearchForm/
@@ -97,6 +121,8 @@ src/
 │   ├── Inter-Medium.ttf
 │   ├── Inter-Regular.ttf
 │   └── Inter-SemiBold.ttf
+├── hooks/
+│   └── useFormAndValidation.js
 ├── images/
 │   └── hero.png
 ├── utils/
